@@ -30,7 +30,7 @@ Efek blur dan Magic Lamp memakai GPU. Di GPU lemah, ikuti [Performa](06-performa
 Biasanya sudah terpasang di Ubuntu Desktop. Kalau ada yang kurang:
 
 ```bash
-sudo apt install -y git curl unzip python3 python3-venv dconf-cli fontconfig gnome-shell-extension-prefs
+sudo apt install -y git curl unzip python3 python3-venv dconf-cli libglib2.0-bin fontconfig gnome-shell-extension-prefs
 ```
 
 | Perintah | Dipakai untuk |

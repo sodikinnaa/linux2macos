@@ -59,12 +59,20 @@ cd ../..
 
 ### Aplikasi GTK4 / libadwaita
 
-Aplikasi GNOME baru (Files, Settings, Text Editor) tidak membaca `gtk-theme`. Arahkan lewat `~/.config/gtk-4.0`:
+Aplikasi GNOME baru (Files, Settings, Text Editor) tidak membaca `gtk-theme`. Arahkan lewat `~/.config/gtk-4.0`.
+
+Rilis WhiteSur menyimpan tema GTK4 di dalam `gtk.gresource`, dan file itu **tidak** terbaca dari `~/.config/gtk-4.0`. Kalau langsung di-link, tema tidak termuat, tombol jendela jadi abu‑abu (× – ○), dan log berisi *"Failed to import: The resource at /org/gnome/theme/gtk.css does not exist"*. Ekstrak dulu:
 
 ```bash
+D=~/.themes/WhiteSur-Dark/gtk-4.0
+for r in $(gresource list $D/gtk.gresource); do
+  f=$D/extracted/${r#/org/gnome/theme/}
+  mkdir -p "$(dirname "$f")" && gresource extract $D/gtk.gresource "$r" > "$f"
+done
+
 mkdir -p ~/.config/gtk-4.0
-for f in gtk.css gtk-dark.css assets; do
-  ln -sfn ~/.themes/WhiteSur-Dark/gtk-4.0/$f ~/.config/gtk-4.0/$f
+for f in gtk.css gtk-dark.css assets windows-assets; do
+  ln -sfn $D/extracted/$f ~/.config/gtk-4.0/$f
 done
 ```
 

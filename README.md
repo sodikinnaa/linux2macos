@@ -29,7 +29,7 @@ Semua dipasang di folder **home** kamu: **tanpa `sudo`**, bisa dijalankan per ba
 ## Instalasi cepat
 
 ```bash
-sudo apt install -y git curl unzip python3 python3-venv gnome-shell-extension-prefs
+sudo apt install -y git curl unzip python3 python3-venv libglib2.0-bin gnome-shell-extension-prefs
 git clone https://github.com/sodikinnaa/linux2macos.git
 cd linux2macos
 ./scripts/install.sh

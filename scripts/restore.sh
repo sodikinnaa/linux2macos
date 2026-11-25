@@ -34,7 +34,7 @@ dconf load / <"$from/dconf.ini"
 c_ok "Pengaturan GNOME dikembalikan"
 
 # 2. GTK4 / libadwaita links.
-for f in gtk.css gtk-dark.css assets; do
+for f in gtk.css gtk-dark.css assets windows-assets; do
   [[ -L $HOME/.config/gtk-4.0/$f ]] && rm -f "$HOME/.config/gtk-4.0/$f"
 done
 [[ -d $from/gtk-4.0 ]] && cp -an "$from/gtk-4.0/." "$HOME/.config/gtk-4.0/"

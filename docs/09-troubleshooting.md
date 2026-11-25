@@ -92,7 +92,9 @@ Itu aplikasi GTK4/libadwaita. Cek symlink:
 ls -l ~/.config/gtk-4.0/
 ```
 
-Harus ada `gtk.css`, `gtk-dark.css`, `assets` yang menunjuk ke `~/.themes/WhiteSur-Dark/gtk-4.0/`. Tutup & buka ulang aplikasinya.
+Harus ada `gtk.css`, `gtk-dark.css`, `assets`, `windows-assets` yang menunjuk ke `~/.themes/WhiteSur-Dark/gtk-4.0/extracted/`. Tutup & buka ulang aplikasinya (`nautilus -q` untuk Files).
+
+Kalau tombol jendela Files abu‑abu (× – ○) dan log berisi *"Failed to import … /org/gnome/theme/gtk.css"*, link masih menunjuk ke file rilis yang belum diekstrak. Jalankan ulang `./scripts/install.sh theme`.
 
 ### Aplikasi Flatpak tidak ikut tema
 

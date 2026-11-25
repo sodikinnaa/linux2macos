@@ -132,9 +132,22 @@ m_theme() {
   done
   build_shell_css "$src"
   # libadwaita (GTK4) apps only follow a theme through ~/.config/gtk-4.0.
+  # The release packs GTK4 in gtk.gresource, which is not loaded from there,
+  # so unpack it into plain files first.
+  command -v gresource >/dev/null || c_die "Perintah 'gresource' belum ada (sudo apt install libglib2.0-bin)"
+  for v in Dark Light; do
+    local d="$THEMES_DIR/WhiteSur-$v/gtk-4.0" r
+    [[ -f $d/gtk.gresource ]] || continue
+    for r in $(gresource list "$d/gtk.gresource"); do
+      mkdir -p "$d/extracted/$(dirname "${r#/org/gnome/theme/}")"
+      gresource extract "$d/gtk.gresource" "$r" > "$d/extracted/${r#/org/gnome/theme/}"
+    done
+  done
+  local g4="$THEMES_DIR/WhiteSur-Dark/gtk-4.0"
+  [[ -d $g4/extracted ]] && g4=$g4/extracted
   mkdir -p "$HOME/.config/gtk-4.0"
-  for f in gtk.css gtk-dark.css assets; do
-    ln -sfn "$THEMES_DIR/WhiteSur-Dark/gtk-4.0/$f" "$HOME/.config/gtk-4.0/$f"
+  for f in gtk.css gtk-dark.css assets windows-assets; do
+    [[ -e $g4/$f ]] && ln -sfn "$g4/$f" "$HOME/.config/gtk-4.0/$f"
   done
   gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Dark'
   gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
