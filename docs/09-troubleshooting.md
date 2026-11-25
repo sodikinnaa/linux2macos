@@ -48,6 +48,42 @@ User Themes belum aktif, atau nama tema belum diset:
 dconf read /org/gnome/shell/extensions/user-theme/name   # harus 'WhiteSur-Dark'
 ```
 
+### Tombol Quick Settings saling menumpuk
+
+Contohnya Wired menutupi Wi‑Fi, atau Power Mode menutupi Night Light. Penyebabnya, tema top bar dibuat untuk versi GNOME lain. Rilis WhiteSur ditujukan untuk GNOME 48, sedangkan Ubuntu 24.04 memakai GNOME 46.
+
+Cek versi yang dipakai rilis:
+
+```bash
+grep VERSION ~/.cache/linux2macos/src/WhiteSur-gtk-theme/release/release-info.txt
+gnome-shell --version
+```
+
+Perbaikan: jalankan ulang modul theme, yang akan meng-compile CSS sesuai GNOME kamu:
+
+```bash
+./scripts/install.sh theme
+```
+
+Kalau muncul peringatan *"Pasang 'sassc' atau 'python3-venv'"*, pasang salah satunya dulu (`sudo apt install python3-venv`).
+
+Setelah itu tema top bar langsung dimuat ulang, atau jalankan ini:
+
+```bash
+dconf write /org/gnome/shell/extensions/user-theme/name "''"
+dconf write /org/gnome/shell/extensions/user-theme/name "'WhiteSur-Dark'"
+```
+
+### Desktop terasa ngelag setelah instalasi
+
+Penyebab paling umum adalah blur di menu popup (bawaan Blur my Shell). Versi terbaru `install.sh` sudah mematikannya. Kalau kamu memasang sebelum perbaikan ini:
+
+```bash
+dconf write /org/gnome/shell/extensions/blur-my-shell/popup/blur false
+```
+
+Lihat juga [Performa](06-performa.md#mengukur-beban-gnome-shell).
+
 ### Aplikasi GNOME (Files, Settings) masih tema lama
 
 Itu aplikasi GTK4/libadwaita. Cek symlink:

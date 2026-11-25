@@ -18,7 +18,7 @@ Jangan pakai `sudo`. Script menolak jalan sebagai root karena semua file dipasan
 Urutan yang dikerjakan:
 
 1. **backup**: `dconf dump /`, `~/.bashrc`, dan `~/.config/gtk-4.0` disimpan ke `~/.config/linux2macos/backup/<tanggal>/`
-2. **theme**: rilis WhiteSur Dark/Light diekstrak ke `~/.themes`, GTK4 di‑link
+2. **theme**: rilis WhiteSur Dark/Light diekstrak ke `~/.themes`, tema top bar di-compile ulang bila versi GNOME berbeda dari rilis, GTK4 di‑link
 3. **icons**: ikon WhiteSur dirakit (tanpa menjalankan installer upstream)
 4. **cursors**: kursor WhiteSur
 5. **wallpaper**: resolusi dipilih otomatis (1080p / 2k / 4k)

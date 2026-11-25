@@ -69,6 +69,60 @@ m_backup() {
   c_ok "Backup disimpan di $dir"
 }
 
+# Prints a command that compiles SCSS (sassc, or libsass in a private venv).
+sass_cmd() {
+  if command -v sassc >/dev/null; then
+    echo "sassc -t expanded"
+    return
+  fi
+  local venv="$L2M_CACHE/sassenv"
+  if [[ ! -x $venv/bin/pysassc ]]; then
+    python3 -m venv "$venv" >/dev/null 2>&1 && "$venv/bin/pip" install -q libsass >/dev/null 2>&1 || return 1
+  fi
+  echo "$venv/bin/pysassc -t expanded"
+}
+
+# The prebuilt WhiteSur release targets one GNOME version (see release-info.txt).
+# Its shell CSS breaks other versions (e.g. overlapping Quick Settings toggles on
+# GNOME 46), so rebuild gnome-shell.css for the running version, following
+# shell_base() and customize_theme() in WhiteSur's libs/lib-install.sh.
+build_shell_css() {
+  local src="$1" sv; sv=$(shell_version)
+  local rel; rel=$(grep -oE 'GNOME-SHELL\) [0-9]+' "$src/release/release-info.txt" | grep -oE '[0-9]+$')
+  [[ -n $sv && $sv != "$rel" ]] || return 0
+
+  local widgets ext=46-0
+  if   ((sv >= 48)); then widgets=48-0
+  elif ((sv >= 47)); then widgets=47-0
+  elif ((sv >= 46)); then widgets=46-0
+  elif ((sv >= 44)); then widgets=44-0; ext=40-0
+  elif ((sv >= 42)); then widgets=42-0; ext=40-0
+  else                    widgets=40-0; ext=40-0
+  fi
+
+  local sass; sass=$(sass_cmd) || {
+    c_warn "Tema top bar dibuat untuk GNOME $rel, bukan $sv. Pasang 'sassc' atau 'python3-venv' lalu jalankan ulang modul theme."
+    return 0
+  }
+  local b; b=$(mktemp -d)
+  cp -r "$src/src" "$b/"
+  cp "$b/src/sass/_theme-options.scss" "$b/src/sass/_theme-options-temp.scss"
+  cp "$b/src/sass/_gtk-base.scss" "$b/src/sass/_gtk-base-temp.scss"
+  local base="$b/src/main/gnome-shell/_shell-base-temp.scss"
+  cp "$b/src/main/gnome-shell/_shell-base.scss" "$base"
+  sed -i "/GNOME_SHELL/s/46/$sv/; /widgets/s/46-0/$widgets/; /extensions/s/46-0/$ext/" "$base"
+  ((sv >= 47)) && sed -i "/\$shell_version/s/old/new/" "$b/src/sass/_theme-options-temp.scss"
+
+  local v
+  for v in Dark Light; do
+    $sass "$b/src/main/gnome-shell/gnome-shell-$v.scss" "$THEMES_DIR/WhiteSur-$v/gnome-shell/gnome-shell.css"
+    cp -n "$b/src/assets/gnome-shell/common-assets/"*.svg "$b/src/assets/gnome-shell/assets-$v/"*.svg \
+      "$THEMES_DIR/WhiteSur-$v/gnome-shell/assets/" 2>/dev/null || true
+  done
+  rm -rf "$b"
+  c_ok "Tema top bar di-build ulang untuk GNOME $sv"
+}
+
 m_theme() {
   local src; src=$(clone WhiteSur-gtk-theme)
   mkdir -p "$THEMES_DIR"
@@ -76,6 +130,7 @@ m_theme() {
     rm -rf "$THEMES_DIR/WhiteSur-$v"
     tar -xJf "$src/release/WhiteSur-$v.tar.xz" -C "$THEMES_DIR"
   done
+  build_shell_css "$src"
   # libadwaita (GTK4) apps only follow a theme through ~/.config/gtk-4.0.
   mkdir -p "$HOME/.config/gtk-4.0"
   for f in gtk.css gtk-dark.css assets; do
@@ -228,7 +283,8 @@ m_extensions() {
   done
   rm -rf "$tmp"
 
-  # Blur: static (cheap) on panel and dock, none on app windows.
+  # Blur: static (cheap) on panel and dock, none on app windows or popup menus.
+  # Popup blur is on by default and alone keeps gnome-shell at 20-40% CPU.
   local B=/org/gnome/shell/extensions/blur-my-shell
   dconf write $B/sigma 25
   dconf write $B/panel/blur true;        dconf write $B/panel/static-blur true
@@ -236,6 +292,7 @@ m_extensions() {
   dconf write $B/overview/blur true
   dconf write $B/appfolder/blur true
   dconf write $B/applications/blur false
+  dconf write $B/popup/blur false
   dconf write $B/screenshot/blur false
   dconf write $B/window-list/blur false
 

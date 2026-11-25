@@ -30,7 +30,7 @@ Efek blur dan Magic Lamp memakai GPU. Di GPU lemah, ikuti [Performa](06-performa
 Biasanya sudah terpasang di Ubuntu Desktop. Kalau ada yang kurang:
 
 ```bash
-sudo apt install -y git curl unzip python3 dconf-cli fontconfig gnome-shell-extension-prefs
+sudo apt install -y git curl unzip python3 python3-venv dconf-cli fontconfig gnome-shell-extension-prefs
 ```
 
 | Perintah | Dipakai untuk |
@@ -39,12 +39,24 @@ sudo apt install -y git curl unzip python3 dconf-cli fontconfig gnome-shell-exte
 | `curl` | Mengunduh font, ekstensi, Starship, fastfetch |
 | `unzip`, `tar` | Mengekstrak arsip |
 | `python3` | Mengubah file `.desktop` dan Preferences browser |
+| `python3-venv` | Meng-compile tema top bar untuk versi GNOME kamu (lihat di bawah) |
 | `dconf`, `gsettings` | Mengubah pengaturan GNOME |
 | `gnome-extensions` | Memasang ekstensi (bagian dari GNOME Shell) |
 | `fc-cache` | Mendaftarkan font baru |
 | *Extension Manager* / *Extensions* (opsional) | Mengatur ekstensi lewat GUI |
 
-**Tidak** perlu `sudo` untuk script ini. `sassc` juga tidak perlu karena tema memakai rilis WhiteSur yang sudah jadi.
+**Tidak** perlu `sudo` untuk script ini.
+
+### Kenapa tema top bar di-compile?
+
+Rilis WhiteSur yang sudah jadi (`release/*.tar.xz`) dibuat untuk **satu** versi GNOME (lihat `release/release-info.txt`, saat ini GNOME 48). Kalau versi GNOME kamu berbeda, misalnya Ubuntu 24.04 dengan GNOME 46, tombol Quick Settings (Wired/Wi‑Fi, Power Mode/Night Light) akan **saling menumpuk**.
+
+Karena itu modul `theme` otomatis meng-compile ulang `gnome-shell.css` dari kode sumber WhiteSur untuk versi GNOME kamu:
+
+- memakai `sassc` kalau sudah terpasang, atau
+- membuat lingkungan Python terpisah di `~/.cache/linux2macos/sassenv` dan memasang [libsass](https://pypi.org/project/libsass/) dari PyPI (tanpa sudo, ±5 MB).
+
+Kalau keduanya tidak tersedia, script memberi peringatan dan tetap memakai CSS rilis. Pasang salah satunya lalu jalankan ulang `./scripts/install.sh theme`.
 
 ## Koneksi internet
 
@@ -57,6 +69,7 @@ Total unduhan sekitar **250 MB**:
 | github.com/rsms/inter | ~5 MB |
 | extensions.gnome.org (5 ekstensi) | ~1 MB |
 | Starship + fastfetch | ~7 MB |
+| PyPI: libsass (hanya jika versi GNOME ≠ versi rilis WhiteSur dan `sassc` tidak ada) | ~5 MB |
 
 Hasil clone disimpan di `~/.cache/linux2macos/src`, jadi menjalankan ulang tidak mengunduh dari awal.
 

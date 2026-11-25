@@ -6,6 +6,7 @@ Pengaturan bawaan linux2macos sudah dipilih supaya ringan:
 |---|---|---|
 | Blur top bar & dock | **statis** | Blur dinamis menghitung ulang setiap frame; statis hanya sekali |
 | Blur jendela aplikasi | **mati** | Efek paling berat di Blur my Shell |
+| Blur menu popup | **mati** | Menyala secara bawaan; membuat GNOME Shell 20–40% CPU terus-menerus (turun ke 3–5% setelah dimatikan) |
 | Sigma blur | 25 | Cukup halus, tidak terlalu berat |
 | Magic Lamp | 300 ms, 8×8 tile | Lebih cepat & lebih sedikit poligon dari bawaan (400 ms, 10×10) |
 | Dock | auto‑hide + intellihide | Tidak menutupi jendela, tidak perlu digambar terus |
@@ -61,6 +62,22 @@ Kalau tertulis `llvmpipe`, berarti GPU tidak dipakai (render via CPU). Pasang dr
 ## Refresh rate
 
 Settings → Displays → Refresh Rate: pilih yang tertinggi yang didukung monitor (mis. 75 Hz / 144 Hz). Animasi terasa jauh lebih halus.
+
+## Mengukur beban GNOME Shell
+
+GNOME Shell yang sehat saat diam memakai CPU di bawah ~5%. Ukur rata-rata 6 detik (paket `sysstat`):
+
+```bash
+pidstat -p $(pgrep -x gnome-shell) 1 6 | tail -1
+```
+
+Untuk mencari ekstensi yang berat, matikan satu per satu lalu ukur lagi:
+
+```bash
+gnome-extensions disable blur-my-shell@aunetx; sleep 3
+pidstat -p $(pgrep -x gnome-shell) 1 6 | tail -1
+gnome-extensions enable blur-my-shell@aunetx
+```
 
 ## Memeriksa apa yang membuat lag
 

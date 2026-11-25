@@ -12,6 +12,7 @@ linux2macos hanya berisi script dan dokumentasi. Semua tema, ikon, font, dan eks
 | [Nerd Fonts – JetBrainsMono](https://github.com/ryanoasis/nerd-fonts) | Ryan L McIntyre / JetBrains | SIL OFL 1.1 / MIT | Font terminal |
 | [Starship](https://github.com/starship/starship) | Starship contributors | ISC | Prompt terminal |
 | [fastfetch](https://github.com/fastfetch-cli/fastfetch) | fastfetch contributors | MIT | Info sistem |
+| [libsass-python](https://github.com/sass/libsass-python) | Sass team | MIT | Meng-compile tema top bar jika `sassc` tidak ada |
 | [User Themes](https://extensions.gnome.org/extension/19/user-themes/) | GNOME | GPL-2.0+ | Tema GNOME Shell |
 | [Blur my Shell](https://github.com/aunetx/blur-my-shell) | aunetx | GPL-3.0 | Blur |
 | [Compiz alike Magic Lamp Effect](https://github.com/hermes83/compiz-alike-magic-lamp-effect) | hermes83 | GPL-3.0 | Animasi minimize |

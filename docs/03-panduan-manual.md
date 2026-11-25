@@ -36,6 +36,27 @@ gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
 Varian lain di folder `release/`: `-solid` (tanpa transparansi, lebih ringan) dan `-nord` (warna Nord).
 
+### Penting: sesuaikan tema top bar dengan versi GNOME
+
+Rilis di atas dibuat untuk GNOME versi tertentu (`grep VERSION WhiteSur-gtk-theme/release/release-info.txt`). Kalau berbeda dengan `gnome-shell --version`, tombol Quick Settings akan menumpuk. Compile ulang `gnome-shell.css`. Contoh untuk GNOME 46:
+
+```bash
+python3 -m venv ~/.cache/sassenv && ~/.cache/sassenv/bin/pip install libsass   # atau: sudo apt install sassc
+cd WhiteSur-gtk-theme/src
+cp sass/_theme-options.scss sass/_theme-options-temp.scss
+cp sass/_gtk-base.scss      sass/_gtk-base-temp.scss
+cp main/gnome-shell/_shell-base.scss main/gnome-shell/_shell-base-temp.scss
+# GNOME 47/48: ganti 46/46-0 di _shell-base-temp.scss dengan 47/47-0 atau 48/48-0,
+#              lalu ubah $shell_version: 'old' -> 'new' di sass/_theme-options-temp.scss
+~/.cache/sassenv/bin/pysassc -t expanded main/gnome-shell/gnome-shell-Dark.scss \
+    ~/.themes/WhiteSur-Dark/gnome-shell/gnome-shell.css
+cp -n assets/gnome-shell/common-assets/*.svg assets/gnome-shell/assets-Dark/*.svg \
+    ~/.themes/WhiteSur-Dark/gnome-shell/assets/
+cd ../..
+```
+
+`scripts/install.sh` mengerjakan ini otomatis.
+
 ### Aplikasi GTK4 / libadwaita
 
 Aplikasi GNOME baru (Files, Settings, Text Editor) tidak membaca `gtk-theme`. Arahkan lewat `~/.config/gtk-4.0`:

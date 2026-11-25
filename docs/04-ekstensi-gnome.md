@@ -28,7 +28,9 @@ dconf write /org/gnome/shell/extensions/user-theme/name "'WhiteSur-Dark'"
 
 ### Blur my Shell
 
-Blur **statis** dipakai di top bar & dock karena jauh lebih ringan dari blur dinamis. Blur di jendela aplikasi dimatikan karena paling berat.
+Blur **statis** dipakai di top bar & dock karena jauh lebih ringan dari blur dinamis. Blur di jendela aplikasi dan **menu popup** dimatikan.
+
+> Blur popup menyala secara bawaan di Blur my Shell. Di pengujian (GNOME 46, X11, NVIDIA), pengaturan ini saja membuat GNOME Shell memakai CPU 20–40% terus-menerus. Setelah dimatikan, bebannya turun ke 3–5%.
 
 ```bash
 B=/org/gnome/shell/extensions/blur-my-shell
@@ -38,6 +40,7 @@ dconf write $B/dash-to-dock/blur true; dconf write $B/dash-to-dock/static-blur t
 dconf write $B/overview/blur true
 dconf write $B/appfolder/blur true
 dconf write $B/applications/blur false
+dconf write $B/popup/blur false
 dconf write $B/screenshot/blur false
 dconf write $B/window-list/blur false
 ```

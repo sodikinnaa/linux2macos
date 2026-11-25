@@ -29,7 +29,7 @@ Semua dipasang di folder **home** kamu: **tanpa `sudo`**, bisa dijalankan per ba
 ## Instalasi cepat
 
 ```bash
-sudo apt install -y git curl unzip python3 gnome-shell-extension-prefs
+sudo apt install -y git curl unzip python3 python3-venv gnome-shell-extension-prefs
 git clone https://github.com/sodikinnaa/linux2macos.git
 cd linux2macos
 ./scripts/install.sh
@@ -57,7 +57,7 @@ Panduan lengkap ada di [docs/02-instalasi.md](docs/02-instalasi.md).
 
 | Modul | Isi |
 |---|---|
-| `theme` | Tema GTK & Shell WhiteSur Dark |
+| `theme` | Tema GTK & Shell WhiteSur Dark (top bar di-compile sesuai versi GNOME) |
 | `icons` | Ikon WhiteSur |
 | `cursors` | Kursor WhiteSur |
 | `wallpaper` | Wallpaper WhiteSur sesuai resolusi layar |
