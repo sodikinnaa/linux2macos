@@ -1,6 +1,6 @@
 # 4. Ekstensi GNOME
 
-Lima ekstensi dipasang dari [extensions.gnome.org](https://extensions.gnome.org) sesuai versi GNOME Shell kamu.
+Enam ekstensi dipasang dari [extensions.gnome.org](https://extensions.gnome.org) sesuai versi GNOME Shell kamu.
 
 | Ekstensi | UUID | Fungsi |
 |---|---|---|
@@ -9,6 +9,7 @@ Lima ekstensi dipasang dari [extensions.gnome.org](https://extensions.gnome.org)
 | [Compiz alike Magic Lamp Effect](https://extensions.gnome.org/extension/3740/compiz-alike-magic-lamp-effect/) | `compiz-alike-magic-lamp-effect@hermes83.github.com` | Animasi minimize "tersedot" ke dock (genie) |
 | [Logo Menu](https://extensions.gnome.org/extension/4451/logo-menu/) | `logomenu@aryan_k` | Logo + menu di pojok kiri atas seperti menu Apple |
 | [Just Perfection](https://extensions.gnome.org/extension/3843/just-perfection/) | `just-perfection-desktop@just-perfection` | Memindah jam ke kanan, menyembunyikan tombol Activities, dll. |
+| [Search Light](https://extensions.gnome.org/extension/5489/search-light/) | `search-light@icedman.github.com` | Pencarian ala Spotlight di tengah layar (<kbd>Super</kbd>+<kbd>Spasi</kbd>) |
 
 Ubuntu Dock, Desktop Icons (ding), AppIndicator, dan Tiling Assistant adalah ekstensi bawaan Ubuntu dan tetap aktif.
 
@@ -86,6 +87,8 @@ J=/org/gnome/shell/extensions/just-perfection
 dconf write $J/activities-button false        # sembunyikan titik workspace
 dconf write $J/clock-menu-position 1          # 0 tengah, 1 kanan, 2 kiri
 dconf write $J/clock-menu-position-offset 20  # paling kanan
+dconf write $J/notification-banner-position 2   # notifikasi di kanan atas
+dconf write $J/osd-position 3                   # popup volume/kecerahan di kanan atas
 dconf write $J/startup-status 0               # setelah login langsung ke desktop
 dconf write $J/workspace-popup false          # tanpa popup saat ganti workspace
 gsettings set org.gnome.desktop.interface clock-show-weekday true
@@ -94,6 +97,24 @@ gsettings set org.gnome.desktop.interface clock-show-weekday true
 Just Perfection punya puluhan opsi lain (sembunyikan search, ukuran panel, kecepatan animasi). Buka pengaturannya di aplikasi Extensions.
 
 ---
+
+### Search Light (Spotlight)
+
+```bash
+S=/org/gnome/shell/extensions/search-light
+# Super+Space dipakai Spotlight; ganti layout keyboard pindah ke tombol keyboard khusus
+gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['XF86Keyboard']"
+gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "['<Shift>XF86Keyboard']"
+dconf write $S/shortcut-search "['<Super>space']"
+dconf write $S/border-radius 3.0                       # sudut membulat (indeks 3 = 20px)
+dconf write $S/background-color "(0.12, 0.12, 0.13, 0.80)"
+dconf write $S/blur-background true                    # blur statis, ringan
+dconf write $S/entry-font-size 2
+dconf write $S/border-thickness 1
+dconf write $S/border-color "(1.0, 1.0, 1.0, 0.12)"
+```
+
+Kalau kamu memakai lebih dari satu layout keyboard dan tidak punya tombol keyboard khusus, pilih shortcut lain untuk Search Light, misalnya `['<Alt>space']`.
 
 ## Menonaktifkan satu ekstensi
 

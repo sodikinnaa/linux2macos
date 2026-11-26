@@ -271,7 +271,7 @@ m_dock() {
   gsettings set $D dash-max-icon-size 44
   gsettings set $D transparency-mode 'FIXED'
   gsettings set $D background-opacity 0.35
-  gsettings set $D show-trash false
+  gsettings set $D show-trash true
   gsettings set $D show-mounts false
   gsettings set $D click-action 'minimize-or-previews'
   gsettings set $D custom-theme-shrink true
@@ -333,8 +333,28 @@ m_extensions() {
   dconf write $J/activities-button false
   dconf write $J/clock-menu-position 1
   dconf write $J/clock-menu-position-offset 20
+  dconf write $J/notification-banner-position 2   # notifikasi di kanan atas
+  dconf write $J/osd-position 3                   # popup volume/kecerahan di kanan atas
   dconf write $J/startup-status 0
   dconf write $J/workspace-popup false
+
+  # Search Light: Spotlight-style search on Super+Space. That shortcut used to
+  # switch keyboard layouts, which moves to the dedicated keyboard key.
+  local S=/org/gnome/shell/extensions/search-light
+  gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['XF86Keyboard']"
+  gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "['<Shift>XF86Keyboard']"
+  dconf write $S/shortcut-search "['<Super>space']"
+  dconf write $S/border-radius 3.0
+  dconf write $S/background-color "(0.12, 0.12, 0.13, 0.80)"
+  dconf write $S/blur-background true
+  dconf write $S/blur-sigma 30.0
+  dconf write $S/blur-brightness 0.6
+  dconf write $S/scale-width 0.0
+  dconf write $S/scale-height 0.1
+  dconf write $S/entry-font-size 2
+  dconf write $S/border-thickness 1
+  dconf write $S/border-color "(1.0, 1.0, 1.0, 0.12)"
+  dconf write $S/popup-at-cursor-monitor true
 
   gsettings set org.gnome.shell disable-user-extensions false
   gsettings set org.gnome.desktop.interface enable-animations true

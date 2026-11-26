@@ -63,7 +63,7 @@ Panduan lengkap ada di [docs/02-instalasi.md](docs/02-instalasi.md).
 | `wallpaper` | Wallpaper WhiteSur sesuai resolusi layar |
 | `fonts` | Inter + JetBrainsMono Nerd Font |
 | `dock` | Dock ala macOS |
-| `extensions` | User Themes, Blur my Shell, Magic Lamp, Logo Menu, Just Perfection |
+| `extensions` | User Themes, Blur my Shell, Magic Lamp, Logo Menu, Just Perfection, Search Light |
 | `window` | Tombol jendela di kiri, jendela baru di tengah |
 | `app-icons` | Seragamkan ikon aplikasi snap/AppImage |
 | `terminal` | Warna terminal, Starship, fastfetch |

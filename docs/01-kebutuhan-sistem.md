@@ -67,7 +67,7 @@ Total unduhan sekitar **250 MB**:
 | github.com/vinceliuice (WhiteSur gtk, icon, cursors, wallpapers) | ~120 MB (clone `--depth 1`) |
 | github.com/ryanoasis/nerd-fonts (JetBrainsMono.zip) | ~130 MB |
 | github.com/rsms/inter | ~5 MB |
-| extensions.gnome.org (5 ekstensi) | ~1 MB |
+| extensions.gnome.org (6 ekstensi) | ~1 MB |
 | Starship + fastfetch | ~7 MB |
 | PyPI: libsass (hanya jika versi GNOME ≠ versi rilis WhiteSur dan `sassc` tidak ada) | ~5 MB |
 

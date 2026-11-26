@@ -24,6 +24,7 @@ EXTENSIONS=(
   "compiz-alike-magic-lamp-effect@hermes83.github.com"
   "logomenu@aryan_k"
   "just-perfection-desktop@just-perfection"
+  "search-light@icedman.github.com"
 )
 
 # Single dconf keys changed by install.sh. restore.sh resets these first,
@@ -48,6 +49,8 @@ DCONF_KEYS=(
   /org/gnome/shell/enabled-extensions
   /org/gnome/shell/disable-user-extensions
   /org/gnome/shell/extensions/ding/show-home
+  /org/gnome/desktop/wm/keybindings/switch-input-source
+  /org/gnome/desktop/wm/keybindings/switch-input-source-backward
 )
 
 # Whole dconf directories owned by linux2macos (reset recursively on restore).
@@ -58,6 +61,7 @@ DCONF_DIRS=(
   /org/gnome/shell/extensions/ncom/github/hermes83/compiz-alike-magic-lamp-effect/
   /org/gnome/shell/extensions/Logo-menu/
   /org/gnome/shell/extensions/just-perfection/
+  /org/gnome/shell/extensions/search-light/
 )
 
 c_info()  { printf '\033[1;34m==>\033[0m %s\n' "$*"; }

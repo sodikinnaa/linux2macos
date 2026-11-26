@@ -162,7 +162,7 @@ gsettings set $D intellihide true                 # sembunyi hanya jika tertutup
 gsettings set $D dash-max-icon-size 44
 gsettings set $D transparency-mode 'FIXED'
 gsettings set $D background-opacity 0.35
-gsettings set $D show-trash false
+gsettings set $D show-trash true
 gsettings set $D show-mounts false
 gsettings set $D click-action 'minimize-or-previews'
 gsettings set $D custom-theme-shrink true
@@ -192,7 +192,8 @@ for u in user-theme@gnome-shell-extensions.gcampax.github.com \
          blur-my-shell@aunetx \
          compiz-alike-magic-lamp-effect@hermes83.github.com \
          logomenu@aryan_k \
-         just-perfection-desktop@just-perfection; do
+         just-perfection-desktop@just-perfection \
+         search-light@icedman.github.com; do
   dl=$(curl -s "https://extensions.gnome.org/extension-info/?uuid=$u&shell_version=$SV" \
        | python3 -c 'import sys,json;print(json.load(sys.stdin)["download_url"])')
   curl -sL "https://extensions.gnome.org$dl" -o "$u.zip"
@@ -207,7 +208,8 @@ Muat ulang GNOME Shell (X11: <kbd>Alt</kbd>+<kbd>F2</kbd> → `r`; Wayland: log 
 ```bash
 for u in user-theme@gnome-shell-extensions.gcampax.github.com blur-my-shell@aunetx \
          compiz-alike-magic-lamp-effect@hermes83.github.com logomenu@aryan_k \
-         just-perfection-desktop@just-perfection; do
+         just-perfection-desktop@just-perfection \
+         search-light@icedman.github.com; do
   gnome-extensions enable "$u"
 done
 ```

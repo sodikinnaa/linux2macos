@@ -18,6 +18,7 @@ linux2macos hanya berisi script dan dokumentasi. Semua tema, ikon, font, dan eks
 | [Compiz alike Magic Lamp Effect](https://github.com/hermes83/compiz-alike-magic-lamp-effect) | hermes83 | GPL-3.0 | Animasi minimize |
 | [Logo Menu](https://github.com/Aryan20/Logomenu) | Aryan Kaushik | GPL-2.0 | Menu pojok kiri atas |
 | [Just Perfection](https://gitlab.gnome.org/jrahmatzadeh/just-perfection) | Javad Rahmatzadeh | GPL-3.0 | Posisi jam, tombol Activities |
+| [Search Light](https://github.com/icedman/search-light) | icedman | GPL-3.0 | Pencarian ala Spotlight |
 
 Lisensi masing‑masing proyek bisa berubah. Cek repo aslinya untuk versi terbaru.
 
