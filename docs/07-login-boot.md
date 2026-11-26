@@ -1,6 +1,6 @@
-# 7. Layar Login & Animasi Boot (opsional, butuh `sudo`)
+# 7. Login, Boot, Flatpak & Quick Look (opsional, butuh `sudo`)
 
-Bagian ini **tidak** dikerjakan `install.sh` karena mengubah file sistem di luar folder home. Kerjakan hanya jika kamu paham risikonya. Kesalahan pada layar login bisa membuat kamu tidak bisa login lewat GUI. Sebelum mulai, pastikan kamu tahu cara masuk ke TTY (<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F3</kbd>) untuk memperbaikinya.
+Bagian ini **tidak** dikerjakan `install.sh` karena memasang paket atau mengubah file sistem di luar folder home. Kerjakan hanya jika kamu paham risikonya. Kesalahan pada layar login bisa membuat kamu tidak bisa login lewat GUI. Sebelum mulai, pastikan kamu tahu cara masuk ke TTY (<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F3</kbd>) untuk memperbaikinya.
 
 ---
 
@@ -44,12 +44,36 @@ sudo ./tweaks.sh -g -r
 
 ## Aplikasi Flatpak
 
-Aplikasi Flatpak tidak bisa membaca `~/.themes`. Sambungkan tema dengan:
+Aplikasi Flatpak berjalan di sandbox dan tidak bisa membaca `~/.themes`. Beri izin baca ke folder tema untuk semua aplikasi Flatpak milik user (tanpa sudo):
+
+```bash
+flatpak override --user \
+  --filesystem=xdg-config/gtk-3.0:ro --filesystem=xdg-config/gtk-4.0:ro \
+  --filesystem=~/.themes:ro --filesystem=~/.local/share/icons:ro \
+  --env=GTK_THEME=WhiteSur-Dark --env=ICON_THEME=WhiteSur-dark
+```
+
+Buka ulang aplikasinya. Untuk mengembalikan: `flatpak override --user --reset`.
+
+Alternatif dari WhiteSur sendiri (menyalin tema ke folder sistem, butuh sudo):
 
 ```bash
 cd ~/.cache/linux2macos/src/WhiteSur-gtk-theme
 ./tweaks.sh -F -c Dark
 ```
+
+---
+
+## Quick Look (pratinjau dengan Spasi)
+
+Di macOS, menekan <kbd>Spasi</kbd> pada file di Finder menampilkan pratinjau. Di Files, fitur yang sama disediakan **GNOME Sushi**:
+
+```bash
+sudo apt update && sudo apt install -y gnome-sushi
+nautilus -q
+```
+
+Pilih file di Files lalu tekan <kbd>Spasi</kbd>. Bisa untuk gambar, PDF, video, audio, teks, dan kode. Tekan <kbd>Spasi</kbd> lagi atau <kbd>Esc</kbd> untuk menutup.
 
 ---
 

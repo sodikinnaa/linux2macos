@@ -1,6 +1,6 @@
 # 10. Kredit & Lisensi
 
-linux2macos hanya berisi script dan dokumentasi. Semua tema, ikon, font, dan ekstensi **diunduh langsung dari sumber aslinya** saat instalasi dan tidak disimpan di repo ini.
+linux2macos sendiri (script dan dokumentasi) berlisensi [MIT](../LICENSE). Repo ini hanya berisi script dan dokumentasi. Semua tema, ikon, font, dan ekstensi **diunduh langsung dari sumber aslinya** saat instalasi dan tidak disimpan di repo ini.
 
 | Proyek | Pembuat | Lisensi | Dipakai untuk |
 |---|---|---|---|
@@ -19,6 +19,8 @@ linux2macos hanya berisi script dan dokumentasi. Semua tema, ikon, font, dan eks
 | [Logo Menu](https://github.com/Aryan20/Logomenu) | Aryan Kaushik | GPL-2.0 | Menu pojok kiri atas |
 | [Just Perfection](https://gitlab.gnome.org/jrahmatzadeh/just-perfection) | Javad Rahmatzadeh | GPL-3.0 | Posisi jam, tombol Activities |
 | [Search Light](https://github.com/icedman/search-light) | icedman | GPL-3.0 | Pencarian ala Spotlight |
+| [App menu is back](https://github.com/fthx/appmenu-is-back) | fthx | GPL-3.0 | Nama aplikasi di top bar |
+| [Astra Monitor](https://github.com/AstraExt/astra-monitor) | AstraExt | GPL-3.0 | Monitor CPU/GPU/RAM/disk di top bar |
 
 Lisensi masing‑masing proyek bisa berubah. Cek repo aslinya untuk versi terbaru.
 

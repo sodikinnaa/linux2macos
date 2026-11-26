@@ -98,7 +98,7 @@ Kalau tombol jendela Files abu‑abu (× – ○) dan log berisi *"Failed to imp
 
 ### Aplikasi Flatpak tidak ikut tema
 
-Lihat [Login & Boot → Aplikasi Flatpak](07-login-boot.md#aplikasi-flatpak).
+Lihat [Login, Boot & lainnya → Aplikasi Flatpak](07-login-boot.md#aplikasi-flatpak).
 
 ### Tombol Chrome/Brave masih bawaan
 
@@ -174,7 +174,7 @@ Script mengambil versi ekstensi yang cocok dengan GNOME terbaru. Ekstensi yang b
 ## FAQ
 
 **Apakah aman? Apakah butuh sudo?**
-`install.sh` tidak memakai sudo dan hanya menulis ke folder home. Semua bisa dikembalikan dengan `restore.sh`. Hanya bagian opsional [Login & Boot](07-login-boot.md) yang butuh sudo.
+`install.sh` tidak memakai sudo dan hanya menulis ke folder home. Semua bisa dikembalikan dengan `restore.sh`. Hanya bagian opsional [Login, Boot & lainnya](07-login-boot.md) yang butuh sudo.
 
 **Apakah bisa menjalankan aplikasi macOS?**
 Tidak. Ini hanya tampilan; sistem tetap Ubuntu.

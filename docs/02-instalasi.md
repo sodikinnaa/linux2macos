@@ -24,7 +24,7 @@ Urutan yang dikerjakan:
 5. **wallpaper**: resolusi dipilih otomatis (1080p / 2k / 4k)
 6. **fonts**: Inter + JetBrainsMono Nerd Font
 7. **dock**: posisi, transparansi, auto‑hide, titik indikator
-8. **extensions**: 6 ekstensi dari extensions.gnome.org sesuai versi GNOME kamu, lalu diatur
+8. **extensions**: 8 ekstensi dari extensions.gnome.org sesuai versi GNOME kamu, lalu diatur
 9. **window**: tombol kiri, jendela baru di tengah
 10. **app-icons**: launcher snap/AppImage diarahkan ke ikon WhiteSur
 11. **terminal**: palet warna, font, Starship, fastfetch
@@ -47,7 +47,7 @@ Cek apakah ekstensi aktif:
 gnome-extensions list --enabled
 ```
 
-Harus ada `user-theme@…`, `blur-my-shell@aunetx`, `compiz-alike-magic-lamp-effect@…`, `logomenu@aryan_k`, `just-perfection-desktop@just-perfection`, `search-light@icedman.github.com`.
+Harus ada `user-theme@…`, `blur-my-shell@aunetx`, `compiz-alike-magic-lamp-effect@…`, `logomenu@aryan_k`, `just-perfection-desktop@just-perfection`, `search-light@icedman.github.com`, `appmenu-is-back@fthx`, `monitor@astraext.github.io`.
 
 ## Langkah 4: browser
 

@@ -193,7 +193,8 @@ for u in user-theme@gnome-shell-extensions.gcampax.github.com \
          compiz-alike-magic-lamp-effect@hermes83.github.com \
          logomenu@aryan_k \
          just-perfection-desktop@just-perfection \
-         search-light@icedman.github.com; do
+         search-light@icedman.github.com appmenu-is-back@fthx \
+         monitor@astraext.github.io; do
   dl=$(curl -s "https://extensions.gnome.org/extension-info/?uuid=$u&shell_version=$SV" \
        | python3 -c 'import sys,json;print(json.load(sys.stdin)["download_url"])')
   curl -sL "https://extensions.gnome.org$dl" -o "$u.zip"
@@ -209,7 +210,8 @@ Muat ulang GNOME Shell (X11: <kbd>Alt</kbd>+<kbd>F2</kbd> → `r`; Wayland: log 
 for u in user-theme@gnome-shell-extensions.gcampax.github.com blur-my-shell@aunetx \
          compiz-alike-magic-lamp-effect@hermes83.github.com logomenu@aryan_k \
          just-perfection-desktop@just-perfection \
-         search-light@icedman.github.com; do
+         search-light@icedman.github.com appmenu-is-back@fthx \
+         monitor@astraext.github.io; do
   gnome-extensions enable "$u"
 done
 ```

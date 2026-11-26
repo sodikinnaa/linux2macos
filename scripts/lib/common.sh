@@ -25,6 +25,8 @@ EXTENSIONS=(
   "logomenu@aryan_k"
   "just-perfection-desktop@just-perfection"
   "search-light@icedman.github.com"
+  "appmenu-is-back@fthx"
+  "monitor@astraext.github.io"
 )
 
 # Single dconf keys changed by install.sh. restore.sh resets these first,
@@ -62,6 +64,7 @@ DCONF_DIRS=(
   /org/gnome/shell/extensions/Logo-menu/
   /org/gnome/shell/extensions/just-perfection/
   /org/gnome/shell/extensions/search-light/
+  /org/gnome/shell/extensions/astra-monitor/
 )
 
 c_info()  { printf '\033[1;34m==>\033[0m %s\n' "$*"; }

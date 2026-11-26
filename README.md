@@ -63,7 +63,7 @@ Panduan lengkap ada di [docs/02-instalasi.md](docs/02-instalasi.md).
 | `wallpaper` | Wallpaper WhiteSur sesuai resolusi layar |
 | `fonts` | Inter + JetBrainsMono Nerd Font |
 | `dock` | Dock ala macOS |
-| `extensions` | User Themes, Blur my Shell, Magic Lamp, Logo Menu, Just Perfection, Search Light |
+| `extensions` | User Themes, Blur my Shell, Magic Lamp, Logo Menu, Just Perfection, Search Light, App menu is back, Astra Monitor |
 | `window` | Tombol jendela di kiri, jendela baru di tengah |
 | `app-icons` | Seragamkan ikon aplikasi snap/AppImage |
 | `terminal` | Warna terminal, Starship, fastfetch |
@@ -90,7 +90,7 @@ Detail: [docs/08-kembalikan.md](docs/08-kembalikan.md).
 | 4 | [Ekstensi GNOME](docs/04-ekstensi-gnome.md) | Fungsi & pengaturan setiap ekstensi |
 | 5 | [Browser & Terminal](docs/05-browser-terminal.md) | Tombol ala Mac di Chrome/Brave, terminal Starship |
 | 6 | [Performa](docs/06-performa.md) | Agar tetap ringan & tidak ngelag |
-| 7 | [Login & Boot (opsional, sudo)](docs/07-login-boot.md) | Layar login (GDM) dan animasi boot |
+| 7 | [Login, Boot & lainnya (opsional, sudo)](docs/07-login-boot.md) | Layar login (GDM), animasi boot, aplikasi Flatpak, Quick Look |
 | 8 | [Kembalikan](docs/08-kembalikan.md) | Restore, purge, backup |
 | 9 | [Troubleshooting & FAQ](docs/09-troubleshooting.md) | Masalah umum dan solusinya |
 | 10 | [Kredit & Lisensi](docs/10-kredit.md) | Proyek pihak ketiga yang dipakai |
@@ -115,3 +115,7 @@ linux2macos/
 - Proyek ini hanya **mengubah tampilan**; sistem tetap Ubuntu. Aplikasi macOS tidak bisa dijalankan.
 - Logo Apple dan nama macOS adalah merek dagang Apple Inc. Logo diambil dari aset tema WhiteSur dan tidak disimpan di repo ini.
 - Global menu bar (menu File/Edit di top bar) dan zoom ikon dock (*magnification*) **tidak** dipasang karena tidak stabil di GNOME 46. Lihat [FAQ](docs/09-troubleshooting.md#faq).
+
+## Lisensi
+
+Script dan dokumentasi di repo ini berlisensi [MIT](LICENSE). Tema, ikon, font, dan ekstensi yang diunduh mengikuti lisensi masing-masing (lihat [Kredit](docs/10-kredit.md)).

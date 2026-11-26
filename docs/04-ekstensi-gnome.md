@@ -1,6 +1,6 @@
 # 4. Ekstensi GNOME
 
-Enam ekstensi dipasang dari [extensions.gnome.org](https://extensions.gnome.org) sesuai versi GNOME Shell kamu.
+Delapan ekstensi dipasang dari [extensions.gnome.org](https://extensions.gnome.org) sesuai versi GNOME Shell kamu.
 
 | Ekstensi | UUID | Fungsi |
 |---|---|---|
@@ -10,6 +10,8 @@ Enam ekstensi dipasang dari [extensions.gnome.org](https://extensions.gnome.org)
 | [Logo Menu](https://extensions.gnome.org/extension/4451/logo-menu/) | `logomenu@aryan_k` | Logo + menu di pojok kiri atas seperti menu Apple |
 | [Just Perfection](https://extensions.gnome.org/extension/3843/just-perfection/) | `just-perfection-desktop@just-perfection` | Memindah jam ke kanan, menyembunyikan tombol Activities, dll. |
 | [Search Light](https://extensions.gnome.org/extension/5489/search-light/) | `search-light@icedman.github.com` | Pencarian ala Spotlight di tengah layar (<kbd>Super</kbd>+<kbd>Spasi</kbd>) |
+| [App menu is back](https://extensions.gnome.org/extension/6433/app-menu-is-back/) | `appmenu-is-back@fthx` | Nama aplikasi aktif di top bar, di sebelah logo Apple |
+| [Astra Monitor](https://extensions.gnome.org/extension/6682/astra-monitor/) | `monitor@astraext.github.io` | Persentase CPU, GPU, RAM, dan disk di top bar, seperti iStat Menus |
 
 Ubuntu Dock, Desktop Icons (ding), AppIndicator, dan Tiling Assistant adalah ekstensi bawaan Ubuntu dan tetap aktif.
 
@@ -115,6 +117,44 @@ dconf write $S/border-color "(1.0, 1.0, 1.0, 0.12)"
 ```
 
 Kalau kamu memakai lebih dari satu layout keyboard dan tidak punya tombol keyboard khusus, pilih shortcut lain untuk Search Light, misalnya `['<Alt>space']`.
+
+### App menu is back
+
+Tidak ada pengaturan. Begitu aktif, nama aplikasi yang sedang dipakai muncul di kiri top bar, persis seperti menu aplikasi di macOS. Klik untuk menutup aplikasi atau membuka jendela baru.
+
+### Astra Monitor
+
+Hanya angka persentase yang ditampilkan. Grafik lebih menarik tapi memakan CPU lebih banyak.
+
+```bash
+A=/org/gnome/shell/extensions/astra-monitor
+dconf write $A/monitors-order "'[\"processor\",\"gpu\",\"memory\",\"storage\",\"network\",\"sensors\"]'"
+for m in processor memory storage; do
+  dconf write $A/$m-header-show true
+  dconf write $A/$m-header-percentage true
+  dconf write $A/$m-header-bars false
+done
+dconf write $A/processor-header-graph false
+dconf write $A/processor-update 3.0      # perbarui tiap 3 detik
+dconf write $A/storage-update 5.0
+dconf write $A/network-header-show false
+dconf write $A/sensors-header-show false
+dconf write $A/headers-font-size 11
+```
+
+**GPU.** Kartu grafis harus dipilih berdasarkan alamat PCI-nya. Script mencari otomatis kartu NVIDIA (kalau `nvidia-smi` ada) atau AMD pertama. Kartu Intel dilewati. Untuk memilih manual, buka pengaturan Astra Monitor → *GPU* lalu pilih kartunya, atau:
+
+```bash
+lspci -Dnn | grep -E 'VGA|3D'
+# 0000:01:00.0 VGA ... NVIDIA ... [10de:2187]
+G='{"domain":"0000:01","bus":"00","slot":"0","vendorId":"10de","productId":"2187","monitor":true}'
+dconf write $A/gpu-main "'$G'"
+dconf write $A/gpu-data "'[$G]'"
+dconf write $A/gpu-header-show true
+dconf write $A/gpu-header-activity-percentage true
+dconf write $A/gpu-header-activity-bar false
+dconf write $A/gpu-header-memory-bar false
+```
 
 ## Menonaktifkan satu ekstensi
 

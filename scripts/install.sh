@@ -356,6 +356,43 @@ m_extensions() {
   dconf write $S/border-color "(1.0, 1.0, 1.0, 0.12)"
   dconf write $S/popup-at-cursor-monitor true
 
+  # Astra Monitor: small CPU / GPU / RAM / disk readouts on the right of the
+  # top bar, like iStat Menus. Percentages only; graphs cost more CPU.
+  local A=/org/gnome/shell/extensions/astra-monitor m
+  dconf write $A/monitors-order "'[\"processor\",\"gpu\",\"memory\",\"storage\",\"network\",\"sensors\"]'"
+  for m in processor memory storage; do
+    dconf write $A/$m-header-show true
+    dconf write $A/$m-header-percentage true
+    dconf write $A/$m-header-bars false
+  done
+  dconf write $A/processor-header-graph false
+  dconf write $A/processor-update 3.0
+  dconf write $A/storage-update 5.0
+  dconf write $A/network-header-show false
+  dconf write $A/sensors-header-show false
+  dconf write $A/headers-font-size 11
+  # The GPU readout needs the card picked by its PCI address; take the first
+  # NVIDIA (with nvidia-smi) or AMD card, otherwise leave it off.
+  local gpu
+  gpu=$(lspci -Dnn 2>/dev/null | python3 -I -c '
+import json, re, shutil, sys
+for l in sys.stdin:
+    m = re.match(r"(\w+:\w+):(\w+)\.(\w+) .*(?:VGA|3D|Display).*\[(10de|1002):(\w+)\]", l)
+    if m and (m[4] != "10de" or shutil.which("nvidia-smi")):
+        print(json.dumps(dict(domain=m[1], bus=m[2], slot=m[3], vendorId=m[4], productId=m[5], monitor=True), separators=(",", ":")))
+        break' || true)
+  if [[ -n $gpu ]]; then
+    dconf write $A/gpu-main "'$gpu'"
+    dconf write $A/gpu-data "'[$gpu]'"
+    dconf write $A/gpu-header-show true
+    dconf write $A/gpu-header-activity-percentage true
+    dconf write $A/gpu-header-activity-bar false
+    dconf write $A/gpu-header-memory-bar false
+    dconf write $A/gpu-update 3.0
+  else
+    dconf write $A/gpu-header-show false
+  fi
+
   gsettings set org.gnome.shell disable-user-extensions false
   gsettings set org.gnome.desktop.interface enable-animations true
   gsettings set org.gnome.desktop.interface clock-show-weekday true

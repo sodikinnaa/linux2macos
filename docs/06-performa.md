@@ -59,6 +59,45 @@ glxinfo -B | grep -E 'renderer|direct'     # paket: mesa-utils
 
 Kalau tertulis `llvmpipe`, berarti GPU tidak dipakai (render via CPU). Pasang driver GPU dulu, karena semua efek akan terasa berat.
 
+## Mengetik atau scroll terasa delay
+
+Kalau tema sudah ringan tapi ketikan masih terasa telat muncul, penyebabnya biasanya GPU atau CPU yang sedang berhemat daya. Tiga pengaturan ini aman dan bisa dibatalkan.
+
+**1. GPU NVIDIA selalu siap.** Secara bawaan NVIDIA turun ke clock rendah saat santai, dan butuh waktu untuk naik lagi. Mode *Prefer Maximum Performance* menghilangkan jeda itu (konsumsi listrik sedikit naik):
+
+```bash
+nvidia-settings -a '[gpu:0]/GpuPowerMizerMode=1'
+```
+
+Pengaturan ini hilang setelah reboot. Supaya otomatis setiap login:
+
+```bash
+cat > ~/.config/autostart/nvidia-performance.desktop <<'END'
+[Desktop Entry]
+Type=Application
+Name=NVIDIA Performance
+Exec=nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1
+NoDisplay=true
+END
+```
+
+Batalkan: hapus file itu lalu jalankan `nvidia-settings -a '[gpu:0]/GpuPowerMizerMode=0'`.
+
+**2. Profil daya Performance.** Sama dengan memilih *Performance* di Quick Settings → *Power Mode*:
+
+```bash
+powerprofilesctl set performance      # kembali: balanced
+```
+
+**3. Kurangi swap (butuh sudo).** Ubuntu mulai memindahkan isi RAM ke disk cukup awal (`swappiness` 60). Kalau RAM kamu 16 GB atau lebih, nilai rendah membuat aplikasi tidak tersendat saat dibuka lagi:
+
+```bash
+echo 'vm.swappiness=10' | sudo tee /etc/sysctl.d/99-swappiness.conf
+sudo sysctl --system
+```
+
+Batalkan: `sudo rm /etc/sysctl.d/99-swappiness.conf && sudo sysctl vm.swappiness=60`.
+
 ## Refresh rate
 
 Settings → Displays → Refresh Rate: pilih yang tertinggi yang didukung monitor (mis. 75 Hz / 144 Hz). Animasi terasa jauh lebih halus.
