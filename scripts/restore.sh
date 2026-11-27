@@ -40,6 +40,13 @@ done
 [[ -d $from/gtk-4.0 ]] && cp -an "$from/gtk-4.0/." "$HOME/.config/gtk-4.0/"
 c_ok "Tema GTK4 dilepas"
 
+# Generic font families (sans-serif, monospace) back to the system defaults.
+if [[ -f $FONTCONFIG_FILE ]]; then
+  rm -f "$FONTCONFIG_FILE"
+  fc-cache -f >/dev/null
+  c_ok "Alias font fontconfig dihapus"
+fi
+
 # 3. ~/.bashrc: drop only our block, so later edits by the user survive.
 if grep -qF "$BASHRC_BEGIN" "$HOME/.bashrc" 2>/dev/null; then
   sed -i "/^$BASHRC_BEGIN\$/,/^$BASHRC_END\$/d" "$HOME/.bashrc"

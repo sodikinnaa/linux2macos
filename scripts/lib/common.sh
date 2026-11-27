@@ -9,6 +9,7 @@ L2M_CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/linux2macos"
 THEMES_DIR="$HOME/.themes"
 ICONS_DIR="$HOME/.local/share/icons"
 FONTS_DIR="$HOME/.local/share/fonts"
+FONTCONFIG_FILE="$HOME/.config/fontconfig/conf.d/60-linux2macos.conf"
 BG_DIR="$HOME/.local/share/backgrounds"
 BIN_DIR="$HOME/.local/bin"
 APPS_DIR="$HOME/.local/share/applications"
@@ -38,6 +39,7 @@ DCONF_KEYS=(
   /org/gnome/desktop/interface/color-scheme
   /org/gnome/desktop/interface/font-name
   /org/gnome/desktop/interface/document-font-name
+  /org/gnome/desktop/interface/monospace-font-name
   /org/gnome/desktop/interface/font-antialiasing
   /org/gnome/desktop/interface/font-hinting
   /org/gnome/desktop/interface/clock-show-weekday

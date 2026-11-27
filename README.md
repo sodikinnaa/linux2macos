@@ -61,7 +61,7 @@ Panduan lengkap ada di [docs/02-instalasi.md](docs/02-instalasi.md).
 | `icons` | Ikon WhiteSur |
 | `cursors` | Kursor WhiteSur |
 | `wallpaper` | Wallpaper WhiteSur sesuai resolusi layar |
-| `fonts` | Inter + JetBrainsMono Nerd Font |
+| `fonts` | Inter + JetBrainsMono Nerd Font (juga untuk font generik situs/aplikasi) |
 | `dock` | Dock ala macOS |
 | `extensions` | User Themes, Blur my Shell, Magic Lamp, Logo Menu, Just Perfection, Search Light, App menu is back, Astra Monitor |
 | `window` | Tombol jendela di kiri, jendela baru di tengah |

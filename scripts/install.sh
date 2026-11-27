@@ -253,7 +253,26 @@ m_fonts() {
   gsettings set $I document-font-name 'Inter 10.5'
   gsettings set $I font-antialiasing 'grayscale'
   gsettings set $I font-hinting 'slight'
+  gsettings set $I monospace-font-name 'JetBrainsMono Nerd Font Mono 11'
   gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Inter Semi-Bold 10.5'
+
+  # Apps and web pages that ask for a generic family (sans-serif, system-ui,
+  # monospace) get it from fontconfig, not from gsettings. On a Mac those
+  # resolve to SF Pro / SF Mono, so point them at Inter / JetBrains Mono.
+  mkdir -p "$(dirname "$FONTCONFIG_FILE")"
+  cat >"$FONTCONFIG_FILE" <<'XML'
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<!-- linux2macos: generic families → Inter / JetBrains Mono -->
+<fontconfig>
+  <alias><family>sans-serif</family><prefer><family>Inter</family></prefer></alias>
+  <alias><family>system-ui</family><prefer><family>Inter</family></prefer></alias>
+  <alias><family>-apple-system</family><prefer><family>Inter</family></prefer></alias>
+  <alias><family>BlinkMacSystemFont</family><prefer><family>Inter</family></prefer></alias>
+  <alias><family>monospace</family><prefer><family>JetBrainsMono Nerd Font Mono</family></prefer></alias>
+</fontconfig>
+XML
+  fc-cache -f >/dev/null
   c_ok "Font Inter & JetBrainsMono Nerd Font terpasang"
 }
 

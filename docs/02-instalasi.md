@@ -22,7 +22,7 @@ Urutan yang dikerjakan:
 3. **icons**: ikon WhiteSur dirakit (tanpa menjalankan installer upstream)
 4. **cursors**: kursor WhiteSur
 5. **wallpaper**: resolusi dipilih otomatis (1080p / 2k / 4k)
-6. **fonts**: Inter + JetBrainsMono Nerd Font
+6. **fonts**: Inter + JetBrainsMono Nerd Font, termasuk font generik `sans-serif`/`system-ui`/`monospace` (fontconfig)
 7. **dock**: posisi, transparansi, auto‑hide, titik indikator
 8. **extensions**: 8 ekstensi dari extensions.gnome.org sesuai versi GNOME kamu, lalu diatur
 9. **window**: tombol kiri, jendela baru di tengah

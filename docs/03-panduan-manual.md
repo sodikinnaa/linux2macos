@@ -143,8 +143,30 @@ gsettings set org.gnome.desktop.interface font-name 'Inter 10.5'
 gsettings set org.gnome.desktop.interface document-font-name 'Inter 10.5'
 gsettings set org.gnome.desktop.interface font-antialiasing 'grayscale'
 gsettings set org.gnome.desktop.interface font-hinting 'slight'
+gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono Nerd Font Mono 11'
 gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Inter Semi-Bold 10.5'
 ```
+
+Aplikasi dan situs yang meminta font generik (`sans-serif`, `system-ui`, `monospace`) mengambilnya dari fontconfig, bukan dari gsettings. Di Mac font generik itu menjadi SF Pro / SF Mono. Arahkan ke Inter dan JetBrains Mono:
+
+```bash
+mkdir -p ~/.config/fontconfig/conf.d
+cat > ~/.config/fontconfig/conf.d/60-linux2macos.conf <<'XML'
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+  <alias><family>sans-serif</family><prefer><family>Inter</family></prefer></alias>
+  <alias><family>system-ui</family><prefer><family>Inter</family></prefer></alias>
+  <alias><family>-apple-system</family><prefer><family>Inter</family></prefer></alias>
+  <alias><family>BlinkMacSystemFont</family><prefer><family>Inter</family></prefer></alias>
+  <alias><family>monospace</family><prefer><family>JetBrainsMono Nerd Font Mono</family></prefer></alias>
+</fontconfig>
+XML
+fc-cache -f
+fc-match sans-serif     # harus: Inter
+```
+
+Buka ulang aplikasi/browser untuk melihat hasilnya.
 
 ---
 
